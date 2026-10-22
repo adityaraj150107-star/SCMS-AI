@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#08152f"><title>SCMS_AI | Smart College Management System</title>
+  <meta name="description" content="Sign in to SCMS_AI, an AI-powered college management workspace for students, faculty and administrators.">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="login login-modern login-split">
+  <div class="login-ambient ambient-a" aria-hidden="true"></div><div class="login-ambient ambient-b" aria-hidden="true"></div><div class="login-grid" aria-hidden="true"></div>
+  <div class="login-tools">
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme"><span id="themeIcon">☀</span><span id="themeLabel">Light mode</span></button>
+    <button type="button" class="about-toggle" id="aboutOpen">ⓘ About project</button>
+  </div>
+  <main class="login-stage">
+    <section class="campus-panel" aria-label="SCMS AI college overview">
+      <div class="campus-photo" role="img" aria-label="Modern college campus at sunset with students walking"></div>
+      <div class="campus-shade"></div>
+      <div class="campus-content">
+        <div class="brand-lockup"><div class="campus-logo" aria-hidden="true">⌂<span>✦</span></div><div><div class="campus-brand">SCMS<span>_AI</span></div><div class="campus-brand-sub">NARMADA COLLEGE OF SCIENCE &amp; COMMERCE</div><div class="campus-brand-sub campus-location">Zadeshwar, Bharuch</div></div></div>
+        <div class="campus-headline"><span class="mini-kicker">NARMADA COLLEGE · ZADESHWAR, BHARUCH</span><h1>One Campus.<br><em>Smarter Learning.</em><br>Your AI.</h1><p>SCMS_AI connects student services, faculty workflows and college support in one intelligent workspace.</p></div>
+        <div class="campus-benefits">
+          <div class="benefit-icon">✧</div><div><b>AI-powered assistance</b><small>Get help with college questions and study topics</small></div>
+          <div class="benefit-icon">▤</div><div><b>Academic hub</b><small>Courses, attendance, assignments and notices</small></div>
+          <div class="benefit-icon">◈</div><div><b>One connected workspace</b><small>Student, Faculty and Main Admin portals</small></div>
+        </div>
+        <div class="campus-footer"><div class="campus-seal">N</div><div><b>Narmada College of Science &amp; Commerce</b><small>Empowering Education · Enabling Future · With AI</small></div><span class="campus-sparkle">✦</span></div>
+      </div>
+      <div class="floating-orbit orbit-one"></div><div class="floating-orbit orbit-two"></div>
+    </section>
+
+    <section class="signin-panel" aria-label="Sign in to SCMS AI">
+      <div class="signin-card">
+        <div class="signin-card-top"><div class="mobile-brand-mark">S</div><div class="secure-pill"><span class="secure-dot"></span> SECURE PORTAL ACCESS</div></div>
+        <div class="welcome-copy"><p class="eyebrow">WELCOME BACK</p><h2>Welcome Back!</h2><p class="muted">Sign in to SCMS_AI · Smart College Management System</p></div>
+        {% with messages=get_flashed_messages() %}{% for m in messages %}<div class="alert" role="status">{{m}}</div>{% endfor %}{% endwith %}
+        <form action="/login" method="post" id="loginForm">
+          <label for="portal">Your portal</label>
+          <select id="portal" name="portal" class="portal-select" required>
+            <option value="student">🎓  Student Portal</option><option value="faculty">👩‍🏫  Faculty Portal</option><option value="admin">🛡️  Main Admin Portal</option>
+          </select>
+          <label for="email">Email address</label>
+          <div class="input-icon-wrap"><span aria-hidden="true">✉</span><input id="email" name="email" type="email" required autocomplete="username" placeholder="you@college.edu"></div>
+          <div class="label-line"><label for="password">Password</label><button type="button" class="text-action" id="forgotPassword">Forgot password?</button></div>
+          <div class="input-icon-wrap password-field"><span aria-hidden="true">♙</span><input id="password" name="password" type="password" required autocomplete="current-password" placeholder="Enter your password"><button type="button" class="eye" id="togglePassword" aria-label="Show password">◉</button></div>
+          <label class="remember-line"><input type="checkbox" id="rememberEmail"><span>Remember this email on this device</span></label>
+          <button class="sign-in-button" type="submit"><span>Sign in securely</span><span class="arrow">→</span></button>
+        </form>
+        <div class="account-actions"><button type="button" class="account-action primary-soft" id="accountsOpen"><span>＋</span> Add / switch account</button><button type="button" class="account-action" id="manageAccountsOpen">Manage accounts</button></div>
+        <div class="or-divider"><span>OR</span></div>
+        <a class="create-account-link" href="/signup">New to SCMS_AI? <b>Create an account <span>↗</span></b></a>
+        <div class="signin-features"><div><span>✦</span><b>AI Assistant</b><small>College Q&amp;A and study help</small></div><div><span>◈</span><b>Academic Hub</b><small>One place for learning</small></div><div><span>✓</span><b>Role-based access</b><small>Secure personal workspace</small></div></div>
+        <p class="signin-note">By continuing, you access the SCMS_AI workspace according to your account permissions.</p>
+      </div>
+      <div class="signin-bottomline"><span class="status-pulse"></span> Built for smarter campus experiences <span class="bottom-separator">•</span> Light &amp; dark themes</div>
+    </section>
+  </main>
+
+  <div class="about-backdrop" id="aboutModal" aria-hidden="true"><section class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle"><button type="button" class="about-close" id="aboutClose" aria-label="Close">×</button><div class="about-symbol">✦</div><p class="eyebrow">PROJECT OVERVIEW</p><h2 id="aboutTitle">About SCMS_AI</h2><p>SCMS_AI (Smart College Management System – AI Based) brings everyday academic workflows and AI assistance into one connected workspace.</p><div class="about-points"><div><b>🎓 Student portal</b><span>Academic updates, attendance, assignments and learning support.</span></div><div><b>👩‍🏫 Faculty portal</b><span>Manage course information, learning material and student activities according to permissions.</span></div><div><b>🛡️ Main Admin portal</b><span>Manage users, academic setup, notices and system oversight.</span></div><div><b>🤖 AI assistance</b><span>Ask questions and get help through the configured local Ollama model or optional Gemini service.</span></div></div><p class="about-tech">Flask UI · FastAPI services · SQLite storage · Ollama / optional Gemini</p><button type="button" class="about-done" id="aboutDone">Back to sign in</button></section></div>
+
+  <div class="accounts-backdrop" id="accountsModal" aria-hidden="true"><section class="accounts-card" role="dialog" aria-modal="true" aria-labelledby="accountsTitle"><button type="button" class="about-close" id="accountsClose" aria-label="Close">×</button><div class="about-symbol">♙</div><p class="eyebrow">ACCOUNT CENTER</p><h2 id="accountsTitle">Your saved accounts</h2><p class="accounts-help">For your privacy, SCMS_AI saves email shortcuts only—not passwords. Select an account to sign in or remove a saved shortcut from this device.</p><div id="savedAccountsList" class="saved-accounts-list"></div><div class="accounts-footer-actions"><button type="button" class="account-action primary-soft" id="addAccountGo">＋ Add another account</button><button type="button" class="account-action" id="accountsDone">Done</button></div></section></div>
+
+  <div class="notice-backdrop" id="noticeModal" aria-hidden="true"><section class="notice-card" role="dialog" aria-modal="true" aria-labelledby="noticeTitle"><div class="about-symbol">ⓘ</div><h2 id="noticeTitle">Password reset</h2><p id="noticeText">Use the verified account recovery flow configured by your college administrator. If you have not configured password reset yet, contact the Main Admin.</p><button type="button" class="about-done" id="noticeClose">Got it</button></section></div>
+  <script>
+  (()=>{
+    const root=document.documentElement, body=document.body;
+    function setTheme(theme){root.dataset.theme=theme;body.classList.toggle('dark-theme',theme==='dark');document.getElementById('themeIcon').textContent=theme==='dark'?'☀':'☾';document.getElementById('themeLabel').textContent=theme==='dark'?'Light mode':'Dark mode';try{localStorage.setItem('scms-theme',theme)}catch(e){}}
+    let savedTheme='dark';try{savedTheme=localStorage.getItem('scms-theme')||'dark'}catch(e){}setTheme(savedTheme);
+    document.getElementById('themeToggle').addEventListener('click',()=>setTheme(root.dataset.theme==='dark'?'light':'dark'));
+    document.getElementById('togglePassword').addEventListener('click',()=>{const p=document.getElementById('password'),btn=document.getElementById('togglePassword');p.type=p.type==='password'?'text':'password';btn.setAttribute('aria-label',p.type==='password'?'Show password':'Hide password');btn.textContent=p.type==='password'?'◉':'◎'});
+    const about=document.getElementById('aboutModal');function show(modal){modal.classList.add('visible');modal.setAttribute('aria-hidden','false');const close=modal.querySelector('button');if(close)close.focus()}function hide(modal){modal.classList.remove('visible');modal.setAttribute('aria-hidden','true')}
+    document.getElementById('aboutOpen').addEventListener('click',()=>show(about));document.getElementById('aboutClose').addEventListener('click',()=>hide(about));document.getElementById('aboutDone').addEventListener('click',()=>hide(about));about.addEventListener('click',e=>{if(e.target===about)hide(about)});
+    const accountsModal=document.getElementById('accountsModal'), list=document.getElementById('savedAccountsList'), email=document.getElementById('email');
+    function getAccounts(){try{return JSON.parse(localStorage.getItem('scms-saved-emails')||'[]').filter(x=>typeof x==='string')}catch(e){return []}}
+    function saveAccounts(a){try{localStorage.setItem('scms-saved-emails',JSON.stringify([...new Set(a)].slice(-8)))}catch(e){}}
+    function renderAccounts(){const accounts=getAccounts();list.innerHTML='';if(!accounts.length){const empty=document.createElement('div');empty.className='accounts-empty';empty.innerHTML='<span>✉</span><b>No saved accounts yet</b><small>Tick “Remember this email” when signing in to save an email shortcut on this device.</small>';list.appendChild(empty);return}accounts.forEach((address)=>{const row=document.createElement('div');row.className='saved-account-row';const meta=document.createElement('div');meta.className='saved-account-meta';const icon=document.createElement('span');icon.className='saved-account-icon';icon.textContent=address.charAt(0).toUpperCase();const info=document.createElement('div');const b=document.createElement('b');b.textContent=address;const small=document.createElement('small');small.textContent='Email shortcut · password not saved';info.append(b,small);meta.append(icon,info);const choose=document.createElement('button');choose.type='button';choose.className='account-action choose-account';choose.textContent='Use';choose.addEventListener('click',()=>{email.value=address;hide(accountsModal);document.getElementById('password').focus()});const remove=document.createElement('button');remove.type='button';remove.className='account-action remove-account';remove.textContent='Remove';remove.addEventListener('click',()=>{saveAccounts(getAccounts().filter(x=>x!==address));renderAccounts()});row.append(meta,choose,remove);list.appendChild(row)})}
+    function openAccounts(){renderAccounts();show(accountsModal)}document.getElementById('accountsOpen').addEventListener('click',openAccounts);document.getElementById('manageAccountsOpen').addEventListener('click',openAccounts);document.getElementById('accountsClose').addEventListener('click',()=>hide(accountsModal));document.getElementById('accountsDone').addEventListener('click',()=>hide(accountsModal));accountsModal.addEventListener('click',e=>{if(e.target===accountsModal)hide(accountsModal)});
+    document.getElementById('addAccountGo').addEventListener('click',()=>{hide(accountsModal);window.location.href='/signup'});
+    document.getElementById('rememberEmail').addEventListener('change',e=>{if(e.target.checked&&email.value.trim())saveAccounts([...getAccounts(),email.value.trim().toLowerCase()])});email.addEventListener('change',()=>{if(document.getElementById('rememberEmail').checked&&email.value.trim())saveAccounts([...getAccounts(),email.value.trim().toLowerCase()])});
+    document.getElementById('loginForm').addEventListener('submit',()=>{if(document.getElementById('rememberEmail').checked&&email.value.trim())saveAccounts([...getAccounts(),email.value.trim().toLowerCase()])});
+    const notice=document.getElementById('noticeModal');document.getElementById('forgotPassword').addEventListener('click',()=>show(notice));document.getElementById('noticeClose').addEventListener('click',()=>hide(notice));notice.addEventListener('click',e=>{if(e.target===notice)hide(notice)});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){[about,accountsModal,notice].forEach(hide)}});
+  })();
+  </script>
+</body></html>

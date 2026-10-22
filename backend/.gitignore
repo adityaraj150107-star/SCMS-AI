@@ -1,0 +1,2 @@
+.venv/\nvenv/\n__pycache__/\n*.pyc\n.env\n*.db\n
+frontend/static/uploads/
