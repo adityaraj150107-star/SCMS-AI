@@ -1,94 +1,194 @@
-# SCMS_AI — Smart College Management System (Flask + FastAPI + SQLite + AI)
+<div align="center">
 
-SCMS_AI is a local-development college management project with a Flask web UI, FastAPI REST API, SQLite persistence, role-based access, academic workflows and an AI chat agent. The AI can use a local Ollama model or optional Gemini API.
+# 🎓 SCMS-AI
+### Smart College Management System
 
-## Requirements
+**A role-based college management platform with an AI assistant, academic workflows, and a modern web interface.**
 
-- Python 3.11 or newer
-- Windows + VS Code recommended
-- Ollama installed for local AI (optional if using Gemini)
-- SMTP credentials for real OTP/email delivery; Twilio credentials for real SMS delivery
+<p>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11+" />
+  <img src="https://img.shields.io/badge/Flask-Web_UI-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask" />
+  <img src="https://img.shields.io/badge/FastAPI-REST_API-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+</p>
 
-## Setup on Windows / VS Code
+<p>
+  <a href="https://github.com/adityaraj150107-star/SCMS-AI">Repository</a> ·
+  <a href="#-getting-started">Get Started</a> ·
+  <a href="#-project-architecture">Architecture</a> ·
+  <a href="#-author">Author</a>
+</p>
 
-1. Extract the ZIP and open the `SCMS_AI` folder in VS Code.
-2. Copy `backend\.env.example` to `backend\.env` and set a strong `FLASK_SECRET_KEY`, `JWT_SECRET`, `BOOTSTRAP_ADMIN_EMAIL`, and `BOOTSTRAP_ADMIN_PASSWORD`.
-3. In a PowerShell terminal:
-
-   ```powershell
-   py -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   python -m pip install -r backend\requirements.txt
-   ```
-
-4. For local AI, install Ollama from [ollama.com](https://ollama.com) and run:
-
-   ```powershell
-   ollama pull llama3.2
-   ```
-
-   Ollama normally runs in the background. If needed, start it with `ollama serve` in another terminal.
-
-5. Terminal 1 — FastAPI backend:
-
-   ```powershell
-   python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
-   ```
-
-6. Terminal 2 — Flask UI:
-
-   ```powershell
-   py app.py
-   ```
-
-7. Open [http://127.0.0.1:5000](http://127.0.0.1:5000). API docs are at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
-
-## First login
-
-The Main Admin is bootstrapped from `BOOTSTRAP_ADMIN_EMAIL` and `BOOTSTRAP_ADMIN_PASSWORD` in `.env` when the database is first initialized. Sign in using those values. The database file defaults to `scms_ai.db` in the folder from which you launch the FastAPI command (normally the project root).
-
-## OTP and delivery configuration
-
-- Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM` for real email OTP delivery. Gmail generally requires an App Password.
-- `DEV_SHOW_OTP=true` allows local development to return an OTP in the API response message if SMTP delivery fails. This is for local testing only. Set `DEV_SHOW_OTP=false` before any shared or production deployment.
-- Optional SMS uses Twilio: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_FROM_NUMBER`. Recipient phone numbers should include the country code. SMS is not sent unless valid credentials and phone numbers are configured.
-- Delivery attempts and statuses are recorded in the notifications table; a queued/failed message is not proof that a provider delivered it.
-
-## Included workflows
-
-- Sign in, public student/faculty signup, OTP verification, account switching by signing in to another account
-- Separate UI capabilities for Student, Faculty and Main Admin
-- Course, semester and subject catalogue; notices and role-targeted notifications
-- Student enrollment, attendance, marks, assignments/submissions and timetable APIs/UI
-- Admin user creation, role updates and activation/deactivation
-- AI chat with saved per-user history, quick prompts, optional voice input/output, PDF/DOCX/TXT upload and image preview. Text extraction for image OCR requires optional Tesseract installed on the machine; without it, image preview still works but image contents are not interpreted by the model.
-- Responsive sidebar, animated panels, mobile layouts and dashboard counters
-
-## Workflow Architecture
-
-```mermaid
-flowchart TD
-    U[Student / Faculty / Main Admin] --> UI[Flask Web UI]
-    UI --> API[FastAPI REST API]
-    API --> AUTH[Authentication and Role Checks]
-    AUTH --> DB[(SQLite Database)]
-    API --> AICHAT[AI Chat Agent]
-    AICHAT --> LOCAL[Local Ollama Model]
-    AICHAT -. Optional .-> GEMINI[Gemini API]
-    API --> MOD[Academic Workflows]
-    MOD --> DB
-    API --> NOTIFY[Email / SMS Notifications]
-    NOTIFY --> SMTP[SMTP Provider]
-    NOTIFY -. Optional .-> TWILIO[Twilio SMS]
-    API --> UI
-```
-
-## Important honest limitations
-
-This is a functional local project foundation, not a certified production ERP. Before using real student data or exposing it to the internet, add a security review, HTTPS, CSRF protection, stronger session/token management, backups, audit/retention policies, rate limiting and institution-specific authorization rules. OTP/email/SMS delivery depends on provider configuration. AI does not automatically modify academic records; official changes are made through the relevant forms/API. Image preview works, but full vision-model image reasoning is not included in the current chat API. Faculty/admin workflows are intended for local demonstration and need institution-specific permissions and testing.
+</div>
 
 ---
 
-## Author
+## ✨ Overview
 
-**Aditya Raj** · [GitHub](https://github.com/adityaraj150107-star) · [Portfolio](https://adityaraj150107-star.github.io/Aditya_Raj_Portfolio/)
+**SCMS-AI** is a college management project built to bring common academic and administrative workflows into one application. It combines a **Flask web interface**, a **FastAPI REST backend**, **SQLite persistence**, and an **AI chat assistant** that can connect to a local Ollama model or an optional Gemini API.
+
+The project is intended for local development, learning, and demonstration. It is not presented as a production-certified student information system.
+
+## 🚀 Key Features
+
+| Area | What it includes |
+|---|---|
+| 🔐 Authentication | Sign-in, student/faculty registration, OTP verification, and role-aware access |
+| 🎭 User roles | Student, Faculty, and Main Admin experiences |
+| 📚 Academic workflows | Courses, semesters, subjects, enrollment, attendance, marks, assignments, submissions, and timetable APIs/UI |
+| 📢 Communication | Notices, role-targeted notifications, and configurable email/SMS delivery |
+| 🤖 AI assistant | Per-user chat history, quick prompts, optional voice input/output, and local Ollama or optional Gemini integration |
+| 📎 File support | PDF, DOCX, and TXT uploads plus image preview; image OCR requires optional Tesseract |
+| 📱 Responsive interface | Sidebar navigation, animated panels, mobile layouts, and dashboard counters |
+| 🛠️ Administration | User creation, role updates, and account activation/deactivation |
+
+## 🧰 Tech Stack
+
+- **Frontend:** Flask web UI, HTML/CSS/JavaScript
+- **Backend API:** FastAPI
+- **Database:** SQLite
+- **AI options:** Ollama (local) or optional Gemini API
+- **Notifications:** SMTP email; optional Twilio SMS
+- **Development:** Python 3.11+, VS Code, PowerShell
+
+## 🏁 Getting Started
+
+### Prerequisites
+
+- Python **3.11 or newer**
+- Git and VS Code recommended
+- Ollama only if you want to run the local AI model
+- SMTP/Twilio credentials only if you want real email/SMS delivery
+
+### 1. Create and activate a virtual environment
+
+Open PowerShell in the project folder:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r backend\requirements.txt
+```
+
+### 2. Configure environment variables
+
+Copy the example configuration file:
+
+```powershell
+Copy-Item backend\.env.example backend\.env
+```
+
+Open `backend\.env` and configure the required settings, including strong values for:
+
+- `FLASK_SECRET_KEY`
+- `JWT_SECRET`
+- `BOOTSTRAP_ADMIN_EMAIL`
+- `BOOTSTRAP_ADMIN_PASSWORD`
+
+Set up only the integrations you plan to use. **Never commit real API keys, passwords, tokens, or populated `.env` files to GitHub.**
+
+### 3. Optional: set up local AI with Ollama
+
+Install [Ollama](https://ollama.com), then download the configured model:
+
+```powershell
+ollama pull llama3.2
+```
+
+Ollama usually runs in the background. If required, start it in a separate terminal with `ollama serve`. If you prefer Gemini, configure its API key using your local environment settings instead.
+
+### 4. Start the FastAPI backend
+
+In terminal 1, from the project root:
+
+```powershell
+python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+### 5. Start the Flask web interface
+
+In terminal 2, activate the same virtual environment and run:
+
+```powershell
+py app.py
+```
+
+### 6. Open the application
+
+| Service | Local URL |
+|---|---|
+| Flask web interface | [http://127.0.0.1:5000](http://127.0.0.1:5000) |
+| FastAPI interactive docs | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) |
+
+> **First login:** The Main Admin account is bootstrapped using `BOOTSTRAP_ADMIN_EMAIL` and `BOOTSTRAP_ADMIN_PASSWORD` when the database is initialized. Use the values you configured locally.
+
+## 🏗️ Project Architecture
+
+```mermaid
+flowchart TD
+    U["Student / Faculty / Main Admin"] --> UI["Flask Web UI"]
+    UI --> API["FastAPI REST API"]
+    API --> AUTH["Authentication & Role Checks"]
+    AUTH --> DB[("SQLite Database")]
+    API --> AC["Academic Workflows"]
+    AC --> DB
+    API --> AI["AI Chat Assistant"]
+    AI --> OL["Local Ollama Model"]
+    AI -. "Optional" .-> GM["Gemini API"]
+    API --> N["Notifications"]
+    N --> SMTP["SMTP Email"]
+    N -. "Optional" .-> TW["Twilio SMS"]
+```
+
+## ⚙️ Optional Integrations
+
+### Email OTP
+
+Configure the SMTP settings in your local environment file, such as `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM`. Gmail typically requires an **App Password**, not your normal account password.
+
+### Development OTP fallback
+
+`DEV_SHOW_OTP=true` may expose an OTP in the API response when email delivery fails, for local testing only. Disable it before sharing or deploying the application:
+
+```env
+DEV_SHOW_OTP=false
+```
+
+### SMS
+
+Twilio SMS requires valid `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_FROM_NUMBER` values, plus a recipient number with country code. A queued or failed notification does not guarantee delivery.
+
+## 🔒 Security Notes
+
+- Keep `.env`, API keys, SMTP passwords, tokens, and private credentials out of commits.
+- Use a strong, unique secret for each environment.
+- Do not use real student data in an unreviewed demo installation.
+- Before internet-facing or institutional use, review HTTPS, CSRF protection, session/token handling, authorization rules, rate limiting, backups, logging, and data retention.
+- Configure and test email/SMS providers separately; the application cannot guarantee external delivery.
+
+## 📌 Current Scope & Limitations
+
+- This is a local-development and demonstration project, not a certified production ERP.
+- OTP and SMS delivery depend on external provider configuration.
+- AI chat does not directly make official academic-record changes; use the relevant application workflows.
+- Image preview is available, but full vision-model reasoning is not included in the current chat API. Image text extraction requires optional Tesseract.
+- Faculty/admin permissions should be reviewed and adapted to the requirements of the institution before real-world use.
+
+## 👨‍💻 Author
+
+<div align="center">
+
+### Aditya Raj
+
+[![GitHub](https://img.shields.io/badge/GitHub-adityaraj150107--star-181717?style=for-the-badge&logo=github)](https://github.com/adityaraj150107-star)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-FFB000?style=for-the-badge&logo=googlechrome&logoColor=black)](https://adityaraj150107-star.github.io/Aditya_Raj_Portfolio/)
+
+*Built as a college project to explore web development, APIs, database-backed workflows, and AI integration.*
+
+</div>
+
+---
+
+<div align="center">
+  <sub>If you find this project useful for learning, feel free to explore the code and adapt it for your own practice.</sub>
+</div>
